@@ -1,0 +1,10 @@
+# 静态资源响应头.
+#
+# `run_worker_first = ["/api/*"]` 表示 HTML/JS/CSS 由 assets 层直接返回, 不经过 Worker,
+# 所以这里必须与 src/worker/app.ts 中的 SECURITY_HEADERS 保持一致.
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: no-referrer
+  Strict-Transport-Security: max-age=31536000; includeSubDomains

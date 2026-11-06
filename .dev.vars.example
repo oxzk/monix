@@ -1,0 +1,6 @@
+# 本地开发密钥示例. 复制为 .dev.vars 后填写.
+#
+# Session Cookie 签名密钥, 至少 32 个字符, 可用 `openssl rand -hex 32` 生成.
+# 缺失或过短时 Worker 会拒绝所有请求 (500 config.invalid_session_secret).
+SESSION_SECRET=
+

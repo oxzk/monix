@@ -1,0 +1,30 @@
+name = "monix"
+main = "src/worker/index.ts"
+compatibility_date = "2026-06-10"
+compatibility_flags = ["nodejs_compat"]
+upload_source_maps = true
+
+# Dashboard 与 API 同源部署: 非 /api 路径由静态资源层提供, 并启用 SPA 回退.
+[assets]
+binding = "ASSETS"
+directory = "./dist/client"
+not_found_handling = "single-page-application"
+run_worker_first = ["/api/*"]
+
+[observability]
+enabled = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "monix"
+database_id = "d94dd917-9ecc-423d-b9e2-4b12d4a0ece6"
+migrations_dir = "migrations"
+
+# 全局只使用一个 MonitorDO 实例, 固定名称路由.
+[[durable_objects.bindings]]
+name = "MONITOR"
+class_name = "MonitorDO"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["MonitorDO"]
