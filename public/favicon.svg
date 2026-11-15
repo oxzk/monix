@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Monix">
+  <!--
+    深色圆角块 + 白色 M. 中段 V 用状态绿, 与 Dashboard 的 online 色 (#10b981) 一致,
+    既保证 16px 下仍是清晰的 M 字形, 又带出"信号/在线"的语义.
+  -->
+  <rect width="64" height="64" rx="15" fill="#0f172a"/>
+  <path d="M15 46V19l17 17 17-17v27" fill="none" stroke="#ffffff" stroke-width="6.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M24.5 30.5L32 38l7.5-7.5" fill="none" stroke="#10b981" stroke-width="6.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

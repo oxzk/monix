@@ -1,0 +1,195 @@
+@import "tailwindcss";
+
+@theme {
+    --radius-sm: 0.25rem;
+    --radius-md: 0.375rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+    --radius-2xl: 1rem;
+}
+
+:root {
+    color-scheme: light;
+    --bg: #f6f7f9;
+    --ink: #111827;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --card: #ffffff;
+    font-family: "SF Pro Display", "SF Pro Text", "PingFang SC", "Segoe UI", system-ui, sans-serif;
+    line-height: 1.5;
+    color: var(--ink);
+    background: var(--bg);
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(1200px 500px at 50% -120px, rgba(17, 24, 39, 0.05), transparent 60%),
+        var(--bg);
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+#root {
+    min-height: 100vh;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+button,
+a {
+    cursor: pointer;
+}
+
+/* 不在 a 上设置 color, 避免覆盖 Tailwind 的 text-white 等工具类. */
+a {
+    text-decoration: none;
+}
+
+/* ---------------- 登录页(参考 ternox) ---------------- */
+
+/* 点阵网格背景: 亮色点在暗底上形成终端纹理. */
+.login-dots {
+    background-image: radial-gradient(rgba(226, 232, 240, 0.14) 1px, transparent 1px);
+    background-size: 26px 26px;
+}
+
+/* CRT 扫描线: 每 3px 一条暗线, 叠加在点阵之上. */
+.crt-lines {
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.16) 0 1px,
+        transparent 1px 3px
+    );
+}
+
+/* ASCII LOGO 辉光. */
+.login-glow {
+    text-shadow: 0 0 14px rgba(52, 211, 153, 0.35);
+}
+
+/* 错误提示抖动. */
+.login-shake {
+    animation: login-shake 0.3s;
+}
+
+@keyframes login-shake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-4px);
+    }
+    75% {
+        transform: translateX(4px);
+    }
+}
+
+
+/* ---------------- 全局滚动条 ---------------- */
+
+/*
+ * 细长圆角滚动条, 默认近乎透明, 悬停容器或拖拽时才加深,
+ * 避免在卡片、表格、终端里形成明显的灰色条.
+ */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(100, 116, 139, 0.35) transparent;
+}
+
+*::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
+    border-radius: 999px;
+    background-clip: content-box;
+    background-color: rgba(100, 116, 139, 0.28);
+    transition: background-color 0.15s ease;
+}
+
+*:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 116, 139, 0.45);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(100, 116, 139, 0.65);
+}
+
+*::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* 深色终端区域使用浅色滑块, 与背景形成对比. */
+.monix-scroll-dark {
+    scrollbar-color: rgba(148, 163, 184, 0.4) transparent;
+}
+
+.monix-scroll-dark::-webkit-scrollbar-thumb {
+    background-color: rgba(148, 163, 184, 0.35);
+}
+
+.monix-scroll-dark:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(148, 163, 184, 0.55);
+}
+
+.monix-scroll-dark::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(148, 163, 184, 0.75);
+}
+
+/* xterm 使用自己的滚动容器, 单独适配为深色细滚动条. */
+.xterm .xterm-viewport {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(148, 163, 184, 0.4) transparent;
+}
+
+.xterm .xterm-viewport::-webkit-scrollbar {
+    width: 10px;
+}
+
+.xterm .xterm-viewport::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.xterm .xterm-viewport::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
+    border-radius: 999px;
+    background-clip: content-box;
+    background-color: rgba(148, 163, 184, 0.35);
+}
+
+.xterm .xterm-viewport:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(148, 163, 184, 0.55);
+}
+
+/* 前台玻璃面板: 半透明底 + 背景模糊, 让 body 级背景图透出(参考 MyNodeQuery). */
+.p-glass {
+    background-color: color-mix(in srgb, var(--p-card) 72%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/* 前台容器(Bootstrap containers): 小屏撑满 + 内边距, 断点处分级限宽居中. */
+.p-container {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: 1rem;
+}
+
+@media (min-width: 576px) { .p-container { max-width: 540px } }
+@media (min-width: 768px) { .p-container { max-width: 720px } }
+@media (min-width: 992px) { .p-container { max-width: 960px } }
+@media (min-width: 1200px) { .p-container { max-width: 1140px } }
+@media (min-width: 1400px) { .p-container { max-width: 1320px } }
+@media (min-width: 1440px) { .p-container { max-width: 1440px } }
